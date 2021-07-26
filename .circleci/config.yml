@@ -10,6 +10,9 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
     steps:
       - checkout # this pulls code down from GitHub
       - run: echo "A first hello" # This prints "A first hello" to stdout.
+      - add_ssh_keys:
+          fingerprints:
+            - "47:04:56:bb:df:b5:be:32:a6:8c:11:5b:2c:c2:bd:d9"
       - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
   two: # This is our second job.
     docker: # it runs inside a docker image, the same as above.
@@ -20,6 +23,9 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
     steps:
       - checkout
       - run: echo "A more familiar hi" # We run a similar echo command to above.
+      - add_ssh_keys:
+          fingerprints:
+            - "47:04:56:bb:df:b5:be:32:a6:8c:11:5b:2c:c2:bd:d9"
       - run: sleep 15 # and then sleep for 15 seconds.
 # Under the workflows: map, we can coordinate our two jobs, defined above.
 workflows:
